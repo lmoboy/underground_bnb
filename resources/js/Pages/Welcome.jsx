@@ -1,7 +1,24 @@
 import { Link, Head } from "@inertiajs/react";
-import Dropdown from '@/Components/Dropdown';
+import Dropdown from "@/Components/Dropdown";
 import HousingCard from "./Card/HousingCard";
+import { useEffect, useState } from "react";
 export default function Welcome({ auth }) {
+    const [roomsJSX, setRoomsJSX] = useState(null);
+    
+    useEffect(() => {
+        axios.get("/rooms").then((response) => {
+            console.log(auth)
+            const rooms = response.data.rooms;
+            const roomsJSXArray = rooms.map((housing) => (
+                <HousingCard
+                    auth={auth}
+                    key={housing.id}
+                    housing={housing}
+                />
+            ));
+            setRoomsJSX(roomsJSXArray);
+        });
+    }, []);
     return (
         <>
             <Head title="Welcome" />
@@ -88,30 +105,7 @@ export default function Welcome({ auth }) {
                     </div>
                     <div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {[
-                                {
-                                    id: 1,
-                                    description: "Nice place in the mountains",
-                                    name: "The House",
-                                    price: 1000,
-                                    image: "https://via.placeholder.com/300x200",
-                                    reservation: false,
-                                },
-                                {
-                                    id: 2,
-                                    description: "Cozy apartment in the city",
-                                    name: "The Apartment",
-                                    price: 500,
-                                    image: "https://via.placeholder.com/300x201",
-                                    reservation: true,
-                                },
-                            ].map((housing) => (
-                                <HousingCard
-                                    key={housing.id}
-                                    housing={housing}
-                                    auth={auth}
-                                />
-                            ))}
+                            {roomsJSX ?? <div>Loading...</div>}
                         </div>
                     </div>
                 </div>

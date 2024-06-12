@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->float('price', 2);
+            $table->float('rating', 1);
             $table->boolean('reserved');
             $table->foreignId('reserved_user_id')->constrained('users');
             $table->string('image');
