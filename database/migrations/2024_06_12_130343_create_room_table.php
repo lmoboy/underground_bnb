@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('price', 2);
             $table->float('rating', 1);
             $table->boolean('reserved');
-            $table->foreignId('reserved_user_id')->constrained('users');
+            $table->foreignId('reserved_user_id')->nullable();
             $table->string('image');
             $table->timestamps();
         });

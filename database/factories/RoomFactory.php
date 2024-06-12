@@ -23,7 +23,6 @@ class RoomFactory extends Factory
             'image' => fake()->imageUrl(640, 480),
             'rating' => fake()->randomFloat(1, 0, 5),
             'reserved' => fake()->boolean(),
-            'reserved_user_id' => fake()->numberBetween(2, 33),
         ];
     }
 

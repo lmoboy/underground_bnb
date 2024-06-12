@@ -42,7 +42,7 @@ export default function HousingCard({ auth, housing }) {
         <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
             <img
                 className="w-full"
-                src="https://source.unsplash.com/random/300x200"
+                src={housing.image}
                 alt="Sunset in the mountains"
             />
             <div className="px-6 py-4">
